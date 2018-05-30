@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using FoodOrderSystem.Models;
+using OrderSystem.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FoodOrderSystem
+namespace OrderSystem
 {
     public class Startup
     {
@@ -22,7 +22,7 @@ namespace FoodOrderSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<FoodOrderContext>(option => option.UseInMemoryDatabase("FoodOrder"));
+            services.AddDbContext<OrderContext>(option => option.UseInMemoryDatabase("Order"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

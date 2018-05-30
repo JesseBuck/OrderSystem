@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace FoodOrderSystem.Models
+namespace OrderSystem.Models
 {
-    public class FoodOrder
+    public class Order
     {
         public long Id { get; set; }
 
@@ -24,6 +24,6 @@ namespace FoodOrderSystem.Models
         [Required]
         public Decimal Cost { get; set; }
 
-        public List<FoodOrderItem> OrderItems { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
     }
 }

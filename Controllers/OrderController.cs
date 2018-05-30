@@ -1,34 +1,34 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using FoodOrderSystem.Models;
+using OrderSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace FoodOrderSystem.Controllers
+namespace OrderSystem.Controllers
 {
     [Route("api/[controller]")]
-    public class FoodOrderController : ControllerBase
+    public class OrderController : ControllerBase
     {
-        private readonly FoodOrderContext context;
+        private readonly OrderContext context;
 
-        public FoodOrderController(FoodOrderContext context)
+        public OrderController(OrderContext context)
         {
             this.context = context;
 
             // TODO: Move DB-populating code to separate module
-            if (context.FoodOrders.Count() == 0)
+            if (context.Orders.Count() == 0)
             {
-                context.FoodOrders.Add(new FoodOrder
+                context.Orders.Add(new Order
                 {
                     TimeRecieved = DateTime.Now,
                     CustomerName = "Anon Ymous",
                     DestinationAddress = "123 Real St, Placeland, ZX",
                     Cost = 1_000_000_000m,
-                    OrderItems = new List<FoodOrderItem>
+                    OrderItems = new List<OrderItem>
                     {
-                        new FoodOrderItem { Name = "Extra Large Food" },
-                        new FoodOrderItem { Name = "Drink Powder", CustomerNote = "served wet, plz" }
+                        new OrderItem { Name = "Extra Large Food" },
+                        new OrderItem { Name = "Drink Powder", CustomerNote = "served wet, plz" }
                     }
                 });
 
@@ -39,15 +39,15 @@ namespace FoodOrderSystem.Controllers
 
 
         [HttpGet]
-        public List<FoodOrder> GetAll()
+        public List<Order> GetAll()
         {
-            return context.FoodOrders.ToList();
+            return context.Orders.ToList();
         }
 
         [HttpGet("{id}")]
-        public ActionResult<FoodOrder> GetById(long id)
+        public ActionResult<Order> GetById(long id)
         {
-            FoodOrder item = context.FoodOrders.Find(id);
+            Order item = context.Orders.Find(id);
             if (item == null)
             {
                 return NotFound();

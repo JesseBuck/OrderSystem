@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace FoodOrderSystem.Models
+namespace OrderSystem.Models
 {
-    public class FoodOrderItem
+    public class OrderItem
     {
         public long Id { get; set; }
 
