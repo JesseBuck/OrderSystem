@@ -1,0 +1,6 @@
+  <ul *ngIf="order">
+    <li *ngFor="let item of order.orderItems">
+      {{ item.name }}
+      <span *ngIf="item.customerNote"> ({{ item.customerNote }})</span>
+    </li>
+  </ul>

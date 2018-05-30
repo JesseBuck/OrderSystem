@@ -23,12 +23,26 @@ namespace OrderSystem.Controllers
                 {
                     TimeRecieved = DateTime.Now,
                     CustomerName = "Anon Ymous",
-                    DestinationAddress = "123 Real St, Placeland, ZX",
-                    Cost = 1_000_000_000m,
+                    DestinationAddress = "123 Real St, Placeland, CO",
+                    Cost = 15.89m,
                     OrderItems = new List<OrderItem>
                     {
                         new OrderItem { Name = "Extra Large Food" },
-                        new OrderItem { Name = "Drink Powder", CustomerNote = "served wet, plz" }
+                        new OrderItem { Name = "Drink Powder", CustomerNote = "Served wet" }
+                    }
+                });
+
+                context.Orders.Add(new Order
+                {
+                    TimeRecieved = DateTime.Now.AddHours(-1),
+                    CustomerName = "Imac Ustomer",
+                    DestinationAddress = "Box around the corner",
+                    Cost = 2.50m,
+                    OrderItems = new List<OrderItem>
+                    {
+                        new OrderItem { Name = "Glazed Donut" },
+                        new OrderItem { Name = "Chocolate Donut" },
+                        new OrderItem { Name = "Sprinkle Donut", CustomerNote = "No sprinkes" }
                     }
                 });
 
@@ -41,7 +55,7 @@ namespace OrderSystem.Controllers
         [HttpGet]
         public List<Order> GetAll()
         {
-            return context.Orders.ToList();
+            return context.Orders.Include(order => order.OrderItems).ToList();
         }
 
         [HttpGet("{id}")]
