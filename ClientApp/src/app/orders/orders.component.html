@@ -8,20 +8,11 @@
   <thead class="thead">
     <tr>
       <th>Order</th>
-      <th>Items</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let order of orders">
-      <td>
-        <div><em>Recieved:</em> {{ order.timeRecieved | date:'short' }}</div>
-        <div><em>Customer:</em> {{ order.customerName }}</div>
-        <div><em>Address:</em> {{ order.destinationAddress }}</div>
-        <div><em>Cost:</em> {{ order.cost }}</div>
-      </td>
-      <td>
-        <app-order [order]="order"></app-order>
-      </td>
+      <td><app-order [order]="order"></app-order></td>
     </tr>
   </tbody>
 </table>
