@@ -12,9 +12,6 @@ namespace OrderSystem.Models
         public DateTime TimeRecieved { get; set; }
 
         [Required]
-        public bool Started { get; set; } = false;
-
-        [Required]
         public bool Completed { get; set; }  = false;
 
         public string CustomerName { get; set; }
