@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="order">
   <div class="col-md-4">
     <div>
       <em>Recieved:</em> {{ order.timeRecieved | date:'short' }}</div>
@@ -10,14 +10,14 @@
       <em>Cost:</em> {{ order.cost | currency }}</div>
   </div>
   <div class="col-md-4">
-    <ul *ngIf="order">
+    <ul>
       <li *ngFor="let item of order.orderItems">
         {{ item.name }}
         <span *ngIf="item.customerNote"> ({{ item.customerNote }})</span>
       </li>
     </ul>
   </div>
-  <div class="col-md-4">
-    <button (click)="markAsComplete()">Complete</button>
+  <div class="col-md-4" *ngIf="!order.completed">
+    <button class="btn btn-success" (click)="markAsComplete()">Complete</button>
   </div>
 </div>

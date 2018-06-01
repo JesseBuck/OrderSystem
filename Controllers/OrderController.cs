@@ -35,12 +35,12 @@ namespace OrderSystem.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult SetCompleted(long id, Order updatedOrder)
+        public ActionResult SetCompleted(long id, [FromBody] Order updatedOrder)
         {
             Order order = context.Orders.Find(id);
             if (order == null)
             {
-                return NotFound();
+                return BadRequest("Existing order not found.");
             }
 
             order.Completed = updatedOrder.Completed;

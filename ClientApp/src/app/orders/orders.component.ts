@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { OrderComponent, Order, OrderItem } from '../order/order.component';
 
 @Component({
   selector: 'app-orders',
@@ -14,21 +15,4 @@ export class OrdersComponent {
       this.orders = result;
     }, error => console.error(error));
   }
-}
-
-interface Order {
-  id: Number;
-  timeRecieved: Date;
-  started: Boolean;
-  completed: Boolean;
-  customerName: String;
-  destinationAddress: String;
-  cost: Number;
-  orderItems: Array<OrderItem>;
-}
-
-interface OrderItem {
-  id: Number;
-  name: String;
-  customerNote: String;
 }
