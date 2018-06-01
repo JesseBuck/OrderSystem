@@ -26,12 +26,12 @@ namespace OrderSystem.Controllers
         [HttpGet("{id}")]
         public ActionResult<Order> GetById(long id)
         {
-            Order item = context.Orders.Find(id);
-            if (item == null)
+            Order order = context.Orders.Find(id);
+            if (order == null)
             {
                 return NotFound();
             }
-            return Ok(item);
+            return Ok(order);
         }
 
         [HttpPut("{id}")]
