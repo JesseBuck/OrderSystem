@@ -34,5 +34,21 @@ namespace OrderSystem.Controllers
             return Ok(item);
         }
 
+        [HttpPut("{id}")]
+        public ActionResult SetCompleted(long id, Order updatedOrder)
+        {
+            Order order = context.Orders.Find(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            order.Completed = updatedOrder.Completed;
+
+            context.Orders.Update(order);
+            context.SaveChanges();
+
+            return NoContent();
+        }
     }
 }
