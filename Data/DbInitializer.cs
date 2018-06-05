@@ -16,36 +16,39 @@ namespace OrderSystem.Data
                 return;
             }
 
-            context.Orders.Add(new Order
-            {
-                TimeRecieved = DateTime.Now,
-                CustomerName = "Anon Ymous",
-                DestinationAddress = "123 Real St, Placeland, CO",
-                Cost = 15.89m,
-                OrderItems = new List<OrderItem>
-                {
-                    new OrderItem { Name = "Extra Large Food" },
-                    new OrderItem { Name = "Drink Powder", CustomerNote = "Served wet" }
-                }
-            });
+            Random random = new Random(121);
 
-            context.Orders.Add(new Order
+            for(int i = 0; i < 30; i++)
             {
-                TimeRecieved = DateTime.Now.AddHours(-1),
-                CustomerName = "Imac Ustomer",
-                DestinationAddress = "Box around the corner",
-                Cost = 2.50m,
-                OrderItems = new List<OrderItem>
-                {
-                    new OrderItem { Name = "Glazed Donut" },
-                    new OrderItem { Name = "Chocolate Donut" },
-                    new OrderItem { Name = "Powdered Donut" },
-                    new OrderItem { Name = "Sprinkle Donut", CustomerNote = "No sprinkes" },
-                    new OrderItem { Name = "Plain Donut" },
-                }
-            });
+                context.Orders.Add(generateStaticOrder(random));
+            }
 
             context.SaveChanges();
+        }
+
+        private static Order generateStaticOrder(Random random)
+        {
+
+            List<OrderItem> orderItems = new List<OrderItem>();
+            for (int i = 0; i < random.Next(8); i++)
+            {
+                orderItems.Add(new OrderItem
+                {
+                    Name = $"Item {random.Next()}",
+                    CustomerNote = random.Next() % 5 == 0 ? $"Note {random.Next()}" : null
+                });
+            }
+
+            Order order = new Order
+            {
+                TimeRecieved = DateTime.Now.AddHours(random.Next(-24, 24)),
+                CustomerName = $"Customer {random.Next()}",
+                DestinationAddress = $"Address {random.Next()}",
+                Cost = (decimal)random.NextDouble()*40,
+                OrderItems = orderItems
+            };
+
+            return order;
         }
     }
 }
