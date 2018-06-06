@@ -12,7 +12,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let order of orders">
-      <td><app-order [order]="order"></app-order></td>
+      <td [ngClass]="{'success' : order.completed}"><app-order [order]="order" (makeUpdate)="onUpdate($event)"></app-order></td>
     </tr>
   </tbody>
 </table>

@@ -13,6 +13,21 @@ export class OrdersComponent {
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     http.get<Order[]>(baseUrl + 'api/Order').subscribe(result => {
       this.orders = result;
+      this.sortOrders();
     }, error => console.error(error));
+  }
+
+  onUpdate(): void {
+    this.sortOrders();
+  }
+
+  sortOrders(): void {
+    this.orders = this.orders
+      .sort((a, b) => (a.completed === b.completed) ? 0 : (a.completed ? 1 : -1))
+      .sort((a, b) => (a.timeRecieved.getTime() - b.timeRecieved.getTime()));
+  }
+
+  public trackOrder(index: Number, order: Order): Number | null {
+    return order.id;
   }
 }

@@ -1,6 +1,5 @@
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, Inject, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// import { OrdersComponent } from '../orders/orders.component';
 
 @Component({
   selector: 'app-order',
@@ -9,12 +8,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class OrderComponent {
   @Input() private order;
+  @Output() public makeUpdate = new EventEmitter();
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
-  markAsComplete() {
+  markAsComplete(): void {
     this.order.completed = true;
     this.http.put<Order>(this.baseUrl + 'api/Order/' + this.order.id, this.order).subscribe(result => { }, error => console.error(error));
+    this.makeUpdate.emit(null);
   }
 }
 
