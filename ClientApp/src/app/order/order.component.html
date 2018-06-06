@@ -8,6 +8,8 @@
       <em>Address:</em> {{ order.destinationAddress }}</div>
     <div>
       <em>Cost:</em> {{ order.cost | currency }}</div>
+    <div *ngIf="order.completed">
+      <em>Completed:</em> {{ order.timeCompleted | date:'short' }}</div>
   </div>
   <div class="col-md-4">
     <ul>
