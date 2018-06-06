@@ -35,18 +35,23 @@ namespace OrderSystem.Data
                 orderItems.Add(new OrderItem
                 {
                     Name = $"Item {random.Next()}",
-                    CustomerNote = random.Next() % 5 == 0 ? $"Note {random.Next()}" : null
+                    CustomerNote = random.Next(100) <= 30 ? $"Note {random.Next()}" : null
                 });
             }
 
             Order order = new Order
             {
-                TimeRecieved = DateTime.Now.AddHours(random.Next(-24, 24)),
+                TimeRecieved = DateTime.Now.AddSeconds(-random.Next(172800)),
                 CustomerName = $"Customer {random.Next()}",
                 DestinationAddress = $"Address {random.Next()}",
                 Cost = (decimal)random.NextDouble()*40,
                 OrderItems = orderItems
             };
+
+            if(random.Next(100) < 40) {
+                order.Completed = true;
+                order.TimeCompleted =  order.TimeRecieved.AddSeconds(random.Next(7200));
+            }
 
             return order;
         }
