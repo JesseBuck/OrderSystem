@@ -21,18 +21,19 @@ export class OrderComponent {
 }
 
 export interface Order {
-  id: Number;
-  timeRecieved: Date;
-  started: Boolean;
-  completed: Boolean;
-  customerName: String;
-  destinationAddress: String;
-  cost: Number;
-  orderItems: Array<OrderItem>;
+  id: number;
+  timeRecieved: string;
+  started: boolean;
+  completed: boolean;
+  timeCompleted: string;
+  customerName: string;
+  destinationAddress: string;
+  cost: number;
+  orderItems: OrderItem[];
 }
 
 export interface OrderItem {
-  id: Number;
-  name: String;
-  customerNote: String;
+  id: number;
+  name: string;
+  customerNote: string;
 }

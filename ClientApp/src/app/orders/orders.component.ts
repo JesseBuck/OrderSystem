@@ -31,7 +31,7 @@ export class OrdersComponent {
       new Date(a.timeRecieved).getTime() - new Date(b.timeRecieved).getTime();
   }
 
-  public trackOrder(index: Number, order: Order): Number | null {
+  public trackOrder(index: number, order: Order): number | null {
     return order.id;
   }
 }
