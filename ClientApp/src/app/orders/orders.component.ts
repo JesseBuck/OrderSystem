@@ -22,9 +22,13 @@ export class OrdersComponent {
   }
 
   sortOrders(): void {
-    this.orders = this.orders
-      .sort((a, b) => (a.completed === b.completed) ? 0 : (a.completed ? 1 : -1))
-      .sort((a, b) => (a.timeRecieved.getTime() - b.timeRecieved.getTime()));
+    this.orders = this.orders.sort(this.sortByCompletedThenByRecieved);
+    console.log(this.orders[0].timeRecieved);
+  }
+
+  sortByCompletedThenByRecieved(a: Order, b: Order): number {
+    return ((a.completed === b.completed) ? 0 : (a.completed ? 1 : -1)) ||
+      new Date(a.timeRecieved).getTime() - new Date(b.timeRecieved).getTime();
   }
 
   public trackOrder(index: Number, order: Order): Number | null {
