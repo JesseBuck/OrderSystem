@@ -14,7 +14,7 @@ namespace OrderSystem.Models
         [Required]
         public bool Completed { get; set; }  = false;
 
-        public DateTime TimeCompleted { get; set; }
+        public DateTime? TimeCompleted { get; set; }
 
         public string CustomerName { get; set; }
 

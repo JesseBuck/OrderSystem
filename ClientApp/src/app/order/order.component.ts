@@ -14,7 +14,6 @@ export class OrderComponent {
 
   markAsComplete(): void {
     this.order.completed = true;
-    this.order.timeCompleted = Date.now();
     this.http.put<Order>(this.baseUrl + 'api/Order/' + this.order.id, this.order).subscribe(result => { }, error => console.error(error));
     this.makeUpdate.emit(null);
   }

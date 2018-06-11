@@ -43,6 +43,13 @@ namespace OrderSystem.Controllers
                 return BadRequest("Existing order not found.");
             }
 
+            if(updatedOrder.Completed == true) {
+                updatedOrder.TimeCompleted = DateTime.Now;
+            }
+            else {
+                updatedOrder.TimeCompleted = null;
+            }
+
             order.Completed = updatedOrder.Completed;
 
             context.Orders.Update(order);
