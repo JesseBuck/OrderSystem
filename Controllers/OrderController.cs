@@ -24,7 +24,7 @@ namespace OrderSystem.Controllers
             return context.Orders.Include(order => order.OrderItems).ToList();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetOrder")]
         public ActionResult<Order> GetById(long id)
         {
             Order order = context.Orders.Find(id);
@@ -44,10 +44,12 @@ namespace OrderSystem.Controllers
                 return BadRequest("Existing order not found.");
             }
 
-            if(updatedOrder.Completed == true) {
+            if (updatedOrder.Completed == true)
+            {
                 updatedOrder.TimeCompleted = DateTime.Now;
             }
-            else {
+            else
+            {
                 updatedOrder.TimeCompleted = null;
             }
 
@@ -57,6 +59,16 @@ namespace OrderSystem.Controllers
             context.SaveChanges();
 
             return NoContent();
+        }
+
+        [HttpPost]
+        public ActionResult Create([FromBody] Order order)
+        {
+            order.TimeRecieved = DateTime.Now;
+            context.Add(order);
+            context.SaveChanges();
+
+            return CreatedAtRoute("GetOrder", new {id = order.Id}, order);
         }
     }
 }
