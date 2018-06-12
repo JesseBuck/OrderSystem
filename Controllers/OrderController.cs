@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace OrderSystem.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class OrderController : ControllerBase
     {
         private readonly OrderContext context;
